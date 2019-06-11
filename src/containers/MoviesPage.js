@@ -7,8 +7,20 @@ import MovieShow from './MovieShow';
 const MoviesPage = ({ match, movies }) => (
   <div>
     <MoviesList movies={movies} />
-  </div>;
+    <Route exact path={match.url} render={() => (
+      <h3>Please select a Movie from the list.</h3>
+    )}/>
+    <Route path={`${match.url}/:movieId`} render={routerProps => <MovieShow movies={movies} {...routerProps} /> }/>
+  </div>
 
 )
 
 export default MoviesPage
+
+
+// Added lines 10 - 13 for route nesting
+// changed component={MovieShow}/> on line 13 to render={routerProps =>
+// <MovieShow movies={movies} {...routerProps} /> }/>
+
+// No change in behavior. But, if we change the MovieShow page...
+// The page will populate w/ movie data!
